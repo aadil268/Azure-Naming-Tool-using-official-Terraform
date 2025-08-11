@@ -13,3 +13,4 @@ output "virtual_network_name" {
   value       = module.naming.virtual_network.name
 }
 
+

@@ -1,0 +1,40 @@
+# Example variable values for the Azure naming tool demonstration
+
+# Base environment (Scenario 1)
+
+# The environment code.  Valid options include dev, prd, qlty, tst, sbx, stg, shd, etc.
+environment = "dev"
+
+# Full Azure region name used for deployment (no spaces).  A two‑letter
+# location code will be inferred (e.g. 'northeurope' -> 'ne').  Override with
+# `location_code_override` if your region isn’t included in the map.
+location    = "northeurope"
+
+# Project name that will appear in resource names
+project_name = "sirvis"
+
+# Instance number (1–7).  This will be padded to three digits (001–007).
+instance_number = 1
+
+# Optionally override the inferred two‑letter location code (e.g. "ne" or "we").
+location_code_override = ""
+
+# Multi‑environment configuration (Scenario 2).  Replace or extend these
+# definitions as needed.  Each suffix list must include the location
+# code, environment code and instance number.  The project name is
+# prepended automatically.
+
+# environments = {
+#   dev = {
+#     location = "northeurope"
+#     suffix   = ["ne", "dev", "001"]
+#   }
+#   prd = {
+#     location = "westeurope"
+#     suffix   = ["we", "prd", "001"]
+#   }
+#   tst = {
+#     location = "northeurope"
+#     suffix   = ["ne", "tst", "002"]
+#   }
+# }

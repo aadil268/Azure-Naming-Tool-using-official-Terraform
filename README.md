@@ -2,6 +2,25 @@
 
 This project demonstrates the implementation of the Azure Naming Tool using the official Terraform module (`Azure/naming/azurerm`). It aims to standardize resource names across environments, ensuring compliance and consistency with Azure naming rules and organizational conventions.
 
+## Custom Naming Convention
+
+The naming convention implemented in this project follows the format:
+
+`Resource Type - CCH Project name - Locations - Environments - Custom Instance number`
+
+Examples:
+- `rg-sirvis-we-dev-001` (Resource Group for 'sirvis' project, West Europe, Development environment, Instance 001)
+- `stsirviswesttst002` (Storage Account for 'sirvis' project, West Europe, Test environment, Instance 002)
+- `vnet-sirvis-ne-prd-003` (Virtual Network for 'sirvis' project, North Europe, Production environment, Instance 003)
+
+### Naming Convention Breakdown:
+
+-   **Resource Type**: Default Azure resource naming format (e.g., `rg` for resource group, `vm` for virtual machine, `st` for storage account, `vnet` for virtual network).
+-   **CCH Project name**: A variable project name (e.g., `sirvis`).
+-   **Locations**: Two-letter code for Azure location (e.g., `ne` for North Europe, `we` for West Europe).
+-   **Environments**: `dev`, `prd`, `qlty`, `tst`, `sbx`, `stg`, `shd`.
+-   **Custom Instance number**: A number from `001` to `007`.
+
 ## Project Structure
 
 ```
@@ -13,17 +32,16 @@ azure_naming_tool/
 ├── main.tf
 ├── variables.tf
 ├── outputs.tf
-├── terraform.tfvars    # Sensitive values (ignored by git)
 └── versions.tf
 ```
 
 ## Files Overview
 
-- `main.tf`: Contains the core Terraform configuration, including the `Azure/naming/azurerm` module integration and an example resource group definition.
-- `variables.tf`: Defines input variables for the Terraform configuration, such as `environment_suffix` and `location`.
-- `outputs.tf`: Defines output values that can be retrieved after Terraform applies the configuration, such as generated resource group, storage account, and virtual network names.
-- `versions.tf`: Specifies the required Terraform and AzureRM provider versions.
-- `environments/`: This directory contains environment-specific variable definition files (`.tfvars`) for `dev`, `test`, and `prod`.
+-   `main.tf`: Contains the core Terraform configuration, including the `Azure/naming/azurerm` module integration and an example resource group definition.
+-   `variables.tf`: Defines input variables for the Terraform configuration, such as `cch_project_name`, `location_code`, `environment`, and `instance_number`.
+-   `outputs.tf`: Defines output values that can be retrieved after Terraform applies the configuration, such as generated resource group, storage account, and virtual network names.
+-   `versions.tf`: Specifies the required Terraform and AzureRM provider versions.
+-   `environments/`: This directory contains environment-specific variable definition files (`.tfvars`) for `dev`, `test`, and `prod`.
 
 ## Setup and Usage
 
@@ -71,8 +89,8 @@ azure_naming_tool/
 ### Scenario 1: Generate compliant names for new resources
 
 -   The `main.tf` includes the `Azure/naming/azurerm` module.
--   The `variables.tf` defines parameters like `environment_suffix` and `location` that are used by the naming module.
--   When `terraform apply` is executed, the `module.naming` generates resource names (e.g., `module.naming.resource_group.name`) that follow the organization's naming convention (e.g., `rg-dev`, `rg-test`, `rg-prod`). The module itself is designed to meet Azure naming rules (length, allowed characters, uniqueness).
+-   The `variables.tf` defines parameters like `cch_project_name`, `location_code`, `environment`, and `instance_number` that are used by the naming module.
+-   When `terraform apply` is executed, the `module.naming` generates resource names (e.g., `module.naming.resource_group.name`) that follow the organization's naming convention (e.g., `rg-sirvis-we-dev-001`). The module itself is designed to meet Azure naming rules (length, allowed characters, uniqueness).
 
 ### Scenario 2: Reuse naming convention across multiple deployments
 

@@ -6,7 +6,7 @@ variable "environment_suffix" {
 variable "location" {
   description = "Azure region where resources will be deployed."
   type        = string
-  default     = "West Europe"
+  default     = "North Europe"
 }
 
 variable "subscription_id" {

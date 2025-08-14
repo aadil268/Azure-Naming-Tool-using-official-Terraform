@@ -10,7 +10,7 @@ variable "cch_project_name" {
 }
 
 variable "location_code" {
-  description = "Two-letter code for Azure location (e.g., ne for North Europe, we for West Europe)."
+  description = "Two-letter code for Azure location (e.g., ne for North Europe, we for West Europe). We can automate it using location_code_map"
   type        = string
 }
 

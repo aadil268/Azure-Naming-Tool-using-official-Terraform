@@ -12,5 +12,3 @@ output "virtual_network_name" {
   description = "The generated name for a virtual network."
   value       = module.naming.virtual_network.name
 }
-
-

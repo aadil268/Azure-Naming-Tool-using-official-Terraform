@@ -4,6 +4,12 @@ variable "location" {
   default     = "West Europe"
 }
 
+variable "subscription_id" {
+  description = "Azure subscription ID."
+  type        = string
+}
+
+# Azure Naming Tools Variables
 variable "cch_project_name" {
   description = "CCH Project name for resource naming."
   type        = string
@@ -30,10 +36,4 @@ variable "instance_number" {
     condition     = can(regex("^00[1-7]$", var.instance_number))
     error_message = "Invalid instance number. Must be a string from 001 to 007."
   }
-}
-
-
-variable "subscription_id" {
-  description = "Azure subscription ID."
-  type        = string
 }
